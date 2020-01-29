@@ -1,0 +1,6 @@
+discord
+flask
+googletrans
+praw
+prawcore
+tweepy

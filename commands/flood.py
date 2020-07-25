@@ -5,7 +5,7 @@ info = {
   "desc" : "Make *all* the mods angry"
 }
 
-async def command(ctx):
+async def command(ctx, client):
   t = parseMessage(ctx.content)
   print(t.getContent(1))
   

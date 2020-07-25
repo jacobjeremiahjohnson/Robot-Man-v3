@@ -5,6 +5,6 @@ info = {
   "desc" : "For epic string revera"
 }
 
-async def command(ctx):
+async def command(ctx, client):
   t = parseMessage(ctx.content)
   await ctx.channel.send(t.getContent(1)[::-1])

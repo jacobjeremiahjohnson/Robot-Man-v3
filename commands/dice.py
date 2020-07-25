@@ -5,7 +5,7 @@ info = {
   "desc" : "For some good 'ol fashioned random num generation"
 }
 
-async def command(ctx):
+async def command(ctx, client):
   t = parseMessage(ctx.content)
 
   roll = str(random.randint(1, int(t.getFromIndex(1)))) #Gets the maximum provided by the user and chooses a random number

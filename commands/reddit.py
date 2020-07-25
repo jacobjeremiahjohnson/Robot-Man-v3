@@ -5,7 +5,7 @@ info = {
   "desc" : "There's NSFW protection now you degenerates"
 }
 
-async def command(ctx):
+async def command(ctx, client):
   reddit = praw.Reddit(client_id=os.environ.get("secret"), \
                      client_secret=os.environ.get("token"), \
                      user_agent='Robot man', \
@@ -40,7 +40,7 @@ async def command(ctx):
       print("this thing exists")
       break
   except NotFound:
-    await ctx.send(content = "", embed=errorEmbed(ctx.message.content, ">reddit [Sort By][EXISTING Subreddit]"))
+    await ctx.channel.send(content = "", embed=errorEmbed(ctx.message.content, ">reddit [Sort By][EXISTING Subreddit]"))
   else:
     for submission in Subreddit:
 

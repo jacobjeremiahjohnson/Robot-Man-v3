@@ -5,7 +5,7 @@ info = {
   "desc" : "For all those people who speak English and want to understand some off-brand language"
 }
 
-async def command(ctx):
+async def command(ctx, client):
   translator = Translator()
   t = parseMessage(ctx.content)
   if t.getFromIndex(1).startswith("lang:"): 

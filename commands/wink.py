@@ -5,7 +5,7 @@ info = {
   "desc" : "( ͡- ͜ʖ ͡°)"
 }
 
-async def command(ctx):
+async def command(ctx, client):
   msg = await ctx.channel.send("( ͡° ͜ʖ ͡°)")
 
   while True:

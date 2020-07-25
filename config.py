@@ -1,16 +1,59 @@
 #important functions
-import os, importlib, discord, random, time, praw, asyncio, urllib.request, tweepy, calendar
+import os, importlib, discord, random, time, praw, asyncio, urllib.request, tweepy, calendar, json
 from googletrans import Translator #For translating
 from prawcore import NotFound #Reddit time deluxe *double dab*
 from datetime import datetime
 
-async def checkCommand(context):  
+async def checkCommand(context, client = None):  
+  t = parseMessage(context.content)
+
   for i in os.listdir("commands"):
     if i == "__pycache__":
       continue
-    if i[:-3] in context.content:
+    if i[:-3] in t.getFromIndex(0):
       module = importlib.import_module("commands."+i[:-3])
-      await module.command(context)
+      await module.command(context, client)
+
+async def dbCREATE(client, name, data = None):
+	server = client.get_channel(716786902342172675)
+	final = {
+		"name" : name
+	}
+	if data != None:
+		final.update(data)
+	else:
+		await server.send(json.dumps(final))
+
+async def dbGET(client, name):
+	server = client.get_channel(716786902342172675)
+
+	serverMessageList = await server.history(limit = 10000).flatten()
+	for i in serverMessageList:
+		j = i.content
+		dickt = json.loads(j)
+		if dickt.get("name") == name:
+			return dickt
+		else:
+			continue
+	return False
+
+async def dbADD(client, name, data):
+	server = client.get_channel(716786902342172675)
+
+	serverMessageList = await server.history(limit = 10000).flatten()
+	for i in serverMessageList:
+		j = i.content
+		dickt = json.loads(j)
+		if dickt.get("name") == name:
+			print("PRE UPDATE"+str(dickt))
+			dickt.update(data)
+			print("POST UPDATE"+str(dickt))
+			final = json.dumps(dickt)
+			await i.edit(content = final)
+			return True
+		else:
+			continue
+	return False
 
 def baseEmbed(embedMatrix): #Base embed for embed calls
   global nickList
@@ -67,9 +110,9 @@ def randomActivity(activity): #For literally one command, it just makes that par
   activities = [discord.ActivityType.playing, discord.ActivityType.watching, discord.ActivityType.listening, discord.ActivityType.streaming]
   global currentPresenceType
   gak = str(activities[int(activity)])
-  g, currentPresenceType = gak.split(".")
-  if currentPresenceType == "listening":
-    currentPresenceType = "listening to"
+  g, randomActivity.currentPresenceType = gak.split(".")
+  if randomActivity.currentPresenceType == "listening":
+    randomActivity.currentPresenceType = "listening to"
   return activities[int(activity)] #Returns a random (or determined) discord.Activity type
 
 def randomPresence():
@@ -85,3 +128,33 @@ def randomPresence():
   trueActivity = discord.Activity(name = content, type = randomActivity(gak)) 
   print(content)
   return trueActivity #Returns a discord.Activity object consisting of the valid type and matching presence
+
+HELP = """**Help!,** I need somebody
+**Help!,** not just anybody
+**Help!,** you know I need someone, **HEEelp!**
+When I was younger, so much younger than todaaaay
+I never needed anybody's help! in any way
+But now these days are gone, I'm not so self assuuuured
+Now I find I've changed my mind and opened up the doors
+Help! me if you can, I'm feeling *doooown*
+And I do appreciate you being *roooound*
+Help! me get my feet back on the *grooound*
+Won't you ***PLEEEEeaaaaase, pleeeeeease*** help! me
+ 
+And now my life has changed in oh so many waaaays
+My independence seems to vanish in the haze
+But every now and then I feel so insecuuuuure
+I know that I just need you like I've never done befooore
+Help! me if you can, I'm feeling *doooown*
+And I do appreciate you being *roooound*
+Help! me get my feet back on the *groooound*
+Won't you ***PLEEEAAse, pleeeeease*** help! me
+ 
+When I was younger, so much younger than tooodaaaay
+I never needed anybody's help in any way
+But now these days are gone, I'm not so self  assuuured
+Now I find I've changed my mind and opened up the doors
+Help! me if you can, I'm feeling *doooown*
+And I do appreciate you being *roooound*
+Help! me get my feet back on the *grooooound*
+Won't you ***PLEEEEEEase, pleeeeease*** help! me, help! me, help! meeeeee, **ooooooooh**"""

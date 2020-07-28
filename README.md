@@ -26,6 +26,10 @@ See above
 
 There are countless sources online, but note that this bot uses the `discord.ext` extension of the `discord.py` library
 
+##### How did you get such a good profile picture for the bot?
+
+The profile picture source for all previous, present, and future iterations of Robot Man are stolen directly from the original Power Rangers tv show and similar works
+
 ## Contact Info
 
 My discord is `Jacob!#1340`, ask me questions about the bot or anything else if you'd like

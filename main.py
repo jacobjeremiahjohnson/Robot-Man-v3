@@ -8,11 +8,11 @@ import tweepy
 
 # TODO
 
-# Change scuffed string splice to .endswith in help command Eh nvm fuck it
+
 # Make tic tac toe + W/L stats
 
 client = commands.Bot(command_prefix = ">" and "B)")
-client.remove_command("help") #fuck youuuu
+client.remove_command("help") 
 server()
 #TWITTER
 auth = tweepy.OAuthHandler(
@@ -25,10 +25,6 @@ async def on_ready():
   print(client.user)
   activity = randomPresence()
   await client.change_presence(activity = activity)
-
-  #371432894675288074 - Julie
-  #325092229825953793 - Jacob
-	#352210254219444224 - Kaz
 
 @client.event
 async def on_message(ctx):

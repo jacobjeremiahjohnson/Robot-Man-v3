@@ -37,7 +37,7 @@ async def game(ctx, client, initial, opponent):
 			return False
 		elif len(moveList) >= 3:
 			# do stuff
-			for i in range(1, len(moveList)):
+			for i in range(1, len(moveList)+1):
 					print(moveList)
 					tripString = ""
 
@@ -46,9 +46,11 @@ async def game(ctx, client, initial, opponent):
 					print(tripString)
 					if tripString in possibleWins:
 						return True	
+					elif tripString.reverse() in possibleWins:
+						return True
 					else:
 						tag = moveList[0]
-						moveList.pop(0)
+						moveList.remove(tag)
 						moveList.append(tag)
 					print(moveList)
 			return False
@@ -113,10 +115,6 @@ async def game(ctx, client, initial, opponent):
 				mark = "🔴"	
 				authorList.append(digit)
 				if checkWin(authorList) == True:
-					await screen.clear_reactions()
-					numDict[digit] = mark
-					await screen.edit(content = turn.mention + " won!" + board.format(numDict.get("1"), numDict.get("2"), numDict.get("3"), numDict.get("4"),numDict.get("5"),numDict.get("6"),numDict.get("7"),numDict.get("8"),numDict.get("9")))
-
 					dickt = await dbGET(client, "tictactoeDB")
 					for i in dickt:
 						if i == str(turn):
@@ -130,16 +128,17 @@ async def game(ctx, client, initial, opponent):
 
 					await dbADD(client, "tictactoeDB", {str(turn):"1"})
 
+					await screen.clear_reactions()
+					numDict[digit] = mark
+					await screen.edit(content = turn.mention + " won!" + board.format(numDict.get("1"), numDict.get("2"), numDict.get("3"), numDict.get("4"),numDict.get("5"),numDict.get("6"),numDict.get("7"),numDict.get("8"),numDict.get("9")))
+
+		
 					return
 				turn = opponent
 			else:
 				mark = "❌"
 				opponentList.append(digit)
 				if checkWin(opponentList) == True:
-					await screen.clear_reactions()
-					numDict[digit] = mark
-					await screen.edit(content = turn.mention + " won!" + board.format(numDict.get("1"), numDict.get("2"), numDict.get("3"), numDict.get("4"),numDict.get("5"),numDict.get("6"),numDict.get("7"),numDict.get("8"),numDict.get("9")))
-					
 					dickt = await dbGET(client, "tictactoeDB")
 					for i in dickt:
 						if i == str(turn):
@@ -153,6 +152,10 @@ async def game(ctx, client, initial, opponent):
 
 					await dbADD(client, "tictactoeDB", {str(turn):"1"})
 
+					await screen.clear_reactions()
+					numDict[digit] = mark
+					await screen.edit(content = turn.mention + " won!" + board.format(numDict.get("1"), numDict.get("2"), numDict.get("3"), numDict.get("4"),numDict.get("5"),numDict.get("6"),numDict.get("7"),numDict.get("8"),numDict.get("9")))
+					
 					return
 				turn = ctx.author
 

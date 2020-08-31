@@ -17,7 +17,7 @@ async def game(ctx, client, initial, opponent):
 		"9" : "9⃣"
 	}
 
-	# Numbers to display
+	# Valid numbers to display
 	emojiDict = {
 		"1⃣" : "1",
 		"2⃣" : "2",
@@ -33,22 +33,27 @@ async def game(ctx, client, initial, opponent):
 	possibleWins = ["123", "231", "312", "456","564", "645", "789", "879", "798", "147", "471", "714", "258", "582", "825", "369", "693", "936", "159" ,"591", "915", "357", "573", "735"]
 
 	def checkWin(moveList):
-		if len(moveList) < 3:
+
+		if len(moveList) < 3: # A valid win can never happen before three moves
 			return False
-		elif len(moveList) >= 3:
-			# do stuff
-			for i in range(1, len(moveList)+1):
+
+		elif len(moveList) >= 3: # Do stuff
+
+			for i in range(1, len(moveList)+1): # Iterate through each element of the total move list
 					print(moveList)
 					tripString = ""
 
-					for i in moveList[0:3]:
+					for i in moveList[0:3]: # Create three-character strings at each index of the move List
 						tripString = tripString + i
 					print(tripString)
-					if tripString in possibleWins:
+
+					if tripString in possibleWins: # Check if the current three-character string is in the list of valid wins
 						return True	
-					elif tripString.reverse() in possibleWins:
+
+					elif tripString.reverse() in possibleWins: # Reverse to increase chances of reading a valid string
 						return True
-					else:
+
+					else: # Cycle through the move list to shuffle and vary the next three-character string
 						tag = moveList[0]
 						moveList.remove(tag)
 						moveList.append(tag)
@@ -62,16 +67,17 @@ async def game(ctx, client, initial, opponent):
 {}{}{}
 {}{}{}
 
-"""
+""" # Board template
 
-	turn = random.choice([ctx.author, opponent])
+	turn = random.choice([ctx.author, opponent]) # Randomize who goes first
 
-	moveRequest = "{mention}, it's your turn!".format(mention = turn.mention)
+	moveRequest = "{mention}, it's your turn!".format(mention = turn.mention) # Ping whoever's turn it is
 
-	screen = await ctx.channel.send(moveRequest + board.format(numDict.get("1"), numDict.get("2"), numDict.get("3"), numDict.get("4"),numDict.get("5"),numDict.get("6"),numDict.get("7"),numDict.get("8"),numDict.get("9")))
+	screen = await ctx.channel.send(moveRequest + board.format(numDict.get("1"), numDict.get("2"), numDict.get("3"), numDict.get("4"),numDict.get("5"),numDict.get("6"),numDict.get("7"),numDict.get("8"),numDict.get("9"))) # Yucky yucky code that draws the board from the valid numbers in play
 
-	authorList = []
+	authorList = [] # Initialize lists of both players' moves
 	opponentList = []
+
 	# Main Game Loop 
 	while True:
 		moveRequest = "{mention}, it's your turn!".format(mention = turn.mention)
@@ -132,7 +138,6 @@ async def game(ctx, client, initial, opponent):
 					numDict[digit] = mark
 					await screen.edit(content = turn.mention + " won!" + board.format(numDict.get("1"), numDict.get("2"), numDict.get("3"), numDict.get("4"),numDict.get("5"),numDict.get("6"),numDict.get("7"),numDict.get("8"),numDict.get("9")))
 
-		
 					return
 				turn = opponent
 			else:
@@ -156,7 +161,7 @@ async def game(ctx, client, initial, opponent):
 					numDict[digit] = mark
 					await screen.edit(content = turn.mention + " won!" + board.format(numDict.get("1"), numDict.get("2"), numDict.get("3"), numDict.get("4"),numDict.get("5"),numDict.get("6"),numDict.get("7"),numDict.get("8"),numDict.get("9")))
 					
-					return
+					break
 				turn = ctx.author
 
 			numDict[digit] = mark
@@ -165,5 +170,5 @@ async def game(ctx, client, initial, opponent):
 			if bool(emojiDict) == False:
 		
 				await screen.edit(content = "Tie, that's lame." + board.format(numDict.get("1"), numDict.get("2"), numDict.get("3"), numDict.get("4"),numDict.get("5"),numDict.get("6"),numDict.get("7"),numDict.get("8"),numDict.get("9")))
-				return
-		
+
+				break

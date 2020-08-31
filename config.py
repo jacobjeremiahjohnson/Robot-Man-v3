@@ -95,13 +95,13 @@ class parseMessage: #Tools for message processing
       iterations+=1
     return separator.join(message)
 
-playingList = ["with Proletariat Bot", "Minecraft: Battle Royale", "clarinet lol", "piano lol", "ZombsRoyale.io", "agar.io","slither.io","diep.io","Protobowl","repl.it","Discord","C#-esqe frameworks", "Kirby's Epic Yarn: Battle Royale", "Wii Sports: Battle Royale","Wii Sports Resort: GOTY Edition", "TwitchTetris", "with Legos","dead","videojuegos","virtualpiano.net","Solitaire","Checkers: Battle Royale"]
+playingList = ["with Proletariat Bot", "Twitch Tetris (www.mixedlaughs.tk)", "league pls help", "with matches", "videojeugos"]
 
-watchingList = ["anime", "porn lol", "hentai lol", "pirated anime", "twitch.tv/TheColinizer", "HockeySock", "Disney channel original movies", "Death Note: The Netflix Original Movie", "One Piece (again)", "you", "your mom", "eSports", "you sleep"]
+watchingList = ["anime", "pirated anime", "twitch.tv/TheColinizer", "HockeySock", "Disney channel original movies", "Death Note: The Netflix Original Movie", "One Piece (again)", "you", "your mom", "twitch.tv/harrisn_t", "you sleep"]
 
-listeningList = ["emo garbage", "jazz", "Chill LoFi Hip Hop", "Vaporwave", "Juicewave", "mumble rap", "my mom", "God"]
+listeningList = ["jazz", "Chill LoFi Hip Hop", "Vaporwave aestethics", "mumble rap", "my mom", "God"]
 
-streamingList = ["butt stuff","twitch","pirated anime","Discord","Netflix", "Hulu", "live video feed of your bathroom","live video feed of your webcam","Stardew Valley hentai(???)"]
+streamingList = ["on OF", "my hot Valorant gameplay", "league pls help"]
 
 currentPresenceType = None
 

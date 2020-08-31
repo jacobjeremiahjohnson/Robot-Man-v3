@@ -7,18 +7,26 @@ info = {
 
 async def command(ctx, client):
 	t = parseMessage(ctx.content)
-	name = t.getFromIndex(2)
-	# Check for mentions
+	
+	# Check for mentions or a game
+
 	try:
 		opponent = ctx.mentions[0]
 	except:
-		await ctx.channel.send("You didn't challenge anyone monkey")
+		await ctx.channel.send("You didn't challenge anyone monkey.")
 		return
 	
 	if opponent == ctx.author:
 		await ctx.channel.send("You can't challenge yourself silly.")
 		return
 	
+	try:
+		name = t.getFromIndex(2)
+	except:
+		await ctx.channel.send("You forgot a game. Use `>help challenge` to see a list of games.")
+
+	# Send base accept prompt and setup react conditional
+
 	initial = await ctx.channel.send("🚩 {m}, do you accept?".format(m = opponent.mention))
 	await initial.add_reaction("✔️")
 	await initial.add_reaction("❌")
@@ -32,18 +40,21 @@ async def command(ctx, client):
 		await initial.edit(content = "Request timed out.")
 
 	else:
+
+		try:
+			gameList = []
+			for game in os.listdir("commands/games"):
+					if game.endswith(".py") == True:
+						gameList.append(game)
+			for i in gameList:
+					if i == name + ".py":
+						module = importlib.import_module("commands.games."+name)
+		except:
+			await ctx.channel.send("Game not recognized. Check `>help stats` to see games with supported stats.")
+			return
+
 		if str(reaction.emoji) == "❌":
 			await initial.edit(content = "Challenge declined.")
 		elif str(reaction.emoji) == "✔️":
-			gameList = []
-			for game in os.listdir("commands/games"):
-				if game.endswith(".py") == True:
-					gameList.append(game)
-			for i in gameList:
-				if i == name + ".py":
-					
-					module = importlib.import_module("commands.games."+name)
-					await module.game(ctx, client, initial, opponent)
-					return
-
-			await ctx.channel.send("Game not recognized. Check `>help stats` to see games with supported stats.")
+			await module.game(ctx, client, initial, opponent)
+			return

@@ -3,7 +3,7 @@ from config import*
 async def command(ctx, client, user):
 	dickt = await dbGET(client, "prisonerDB")
 	for i in dickt:
-		if i == str(user):
+		if i == str(user.id):
 			val = dickt.get(i)
 			whole = int(val[0]) + int(val[1])
 			part = int(val[0])

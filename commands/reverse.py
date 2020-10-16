@@ -2,7 +2,7 @@ from config import*
 
 info = {
   "name" : ">reverse [String]",
-  "desc" : "For epic string revera"
+  "desc" : "For epic string reversal"
 }
 
 async def command(ctx, client):

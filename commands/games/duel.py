@@ -36,14 +36,14 @@ async def game(ctx, client, initial, opponent):
 			print(winner)
 			dickt = await dbGET(client, "DuelDB")
 			for i in dickt:
-				if i == str(winner):
-					val = dickt.get(str(winner))
+				if i == str(winner.id):
+					val = dickt.get(str(winner.id))
 
-					pair = {str(winner):str(int(val) + 1)}
+					pair = {str(winner.id):str(int(val) + 1)}
 					await dbADD(client, "DuelDB", pair)
 					return
 				else:
 					continue
 
-			await dbADD(client, "DuelDB", {str(winner):"1"})
+			await dbADD(client, "DuelDB", {str(winner.id):"1"})
 			return

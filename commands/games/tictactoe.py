@@ -48,11 +48,12 @@ async def game(ctx, client, initial, opponent):
 					print(tripString)
 
 					if tripString in possibleWins: # Check if the current three-character string is in the list of valid wins
+						print("Win!")
 						return True	
 
-					elif tripString.reverse() in possibleWins: # Reverse to increase chances of reading a valid string
+					elif tripString[::-1] in possibleWins: # Reverse to increase chances of reading a valid string
 						return True
-
+						print("Win!")
 					else: # Cycle through the move list to shuffle and vary the next three-character string
 						tag = moveList[0]
 						moveList.remove(tag)

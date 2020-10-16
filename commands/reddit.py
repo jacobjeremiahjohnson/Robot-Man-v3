@@ -70,7 +70,6 @@ async def command(ctx, client):
         embed.set_image(url="attachment://"+link)
         embed.add_field(name = "...", value = "[u/" + str(submission.author)+"]"+"(https://reddit.com/u/"+str(submission.author)+"/)", inline = False)
         embed.add_field(name = "...", value = "[Post](https://reddit.com"+submission.permalink+")", inline = False)
-        print("a real error")
         await ctx.channel.send(content="",embed=embed,file=File)
         os.remove(link)
         break

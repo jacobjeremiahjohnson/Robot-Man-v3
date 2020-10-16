@@ -71,21 +71,21 @@ async def game(ctx, client, initial, opponent):
 						resultList = [1 , 0]
 					elif str(choicePair[0]) == "🚫":
 						resultList = [0 , 1]
-					pair = {str(challenger):resultList}
+					pair = {str(challenger.id):resultList}
 					await dbADD(client, "prisonerDB", pair)
 
 				async def opponentADD():
 
 					dickt = await dbGET(client, "prisonerDB")
 					for i in dickt:
-						if i == str(opponent):
-							val = dickt.get(str(opponent))
+						if i == str(opponent.id):
+							val = dickt.get(str(opponent.id))
 							#Values are two item lists, first value is ratted, second is denied
 							if str(choicePair[1]) == "🐀":
 								resultList = [val[0] + 1, val[1]]
 							elif str(choicePair[1]) == "🚫":
 								resultList = [val[0],val[1] + 1]
-							pair = {str(opponent):resultList}
+							pair = {str(opponent.id):resultList}
 							await dbADD(client, "prisonerDB", pair)
 							return
 						else:
@@ -95,7 +95,7 @@ async def game(ctx, client, initial, opponent):
 						resultList = [1 , 0]
 					elif str(choicePair[1]) == "🚫":
 						resultList = [0 , 1]
-					pair = {str(opponent):resultList}
+					pair = {str(opponent.id):resultList}
 					await dbADD(client, "prisonerDB", pair)
 
 				await challBack.delete()

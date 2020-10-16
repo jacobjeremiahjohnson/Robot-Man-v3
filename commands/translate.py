@@ -14,7 +14,7 @@ async def command(ctx, client):
     Dest = lang
   elif translator.translate(t.getContent(1)).text == t.getContent():
     index = 1
-    Dest = 'es'
+    Dest = 'ja'
   else:
     index = 1
     Dest = 'en'

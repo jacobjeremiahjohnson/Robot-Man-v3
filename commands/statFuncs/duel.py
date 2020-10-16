@@ -3,7 +3,7 @@ from config import*
 async def command(ctx, client, user):
 	dickt = await dbGET(client, "DuelDB")
 	for i in dickt:
-		if i == str(user):
+		if i == str(user.id):
 			dickt = {k: v for k, v in sorted(dickt.items(), key=lambda item: item[1])}
 			for j in dickt:
 				top = j

@@ -4,4 +4,4 @@ info = {
 }
 
 async def command(ctx, client):
-  return
+	await client.close()

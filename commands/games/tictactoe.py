@@ -124,8 +124,8 @@ async def game(ctx, client, initial, opponent):
 				if checkWin(authorList) == True:
 					dickt = await dbGET(client, "tictactoeDB")
 					for i in dickt:
-						if i == str(turn):
-							val = dickt.get(str(turn))
+						if i == str(turn.id):
+							val = dickt.get(str(turn.id))
 
 							pair = {str(turn):str(int(val) + 1)}
 							await dbADD(client, "tictactoeDB", pair)
@@ -133,7 +133,7 @@ async def game(ctx, client, initial, opponent):
 					else:
 						continue
 
-					await dbADD(client, "tictactoeDB", {str(turn):"1"})
+					await dbADD(client, "tictactoeDB", {str(turn.id):"1"})
 
 					await screen.clear_reactions()
 					numDict[digit] = mark
@@ -147,8 +147,8 @@ async def game(ctx, client, initial, opponent):
 				if checkWin(opponentList) == True:
 					dickt = await dbGET(client, "tictactoeDB")
 					for i in dickt:
-						if i == str(turn):
-							val = dickt.get(str(turn))
+						if i == str(turn.id):
+							val = dickt.get(str(turn.id))
 
 							pair = {str(turn):str(int(val) + 1)}
 							await dbADD(client, "tictactoeDB", pair)
@@ -156,7 +156,7 @@ async def game(ctx, client, initial, opponent):
 					else:
 						continue
 
-					await dbADD(client, "tictactoeDB", {str(turn):"1"})
+					await dbADD(client, "tictactoeDB", {str(turn.id):"1"})
 
 					await screen.clear_reactions()
 					numDict[digit] = mark

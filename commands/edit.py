@@ -1,4 +1,4 @@
-from config import dbCREATE
+from config import dbCREATE, dbADD
 
 info = {
 	"name" : ">edit",
@@ -6,4 +6,5 @@ info = {
 	}
 
 async def command(ctx, client):
+
 	await ctx.channel.send("Edited!")

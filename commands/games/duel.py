@@ -29,9 +29,9 @@ async def game(ctx, client, initial, opponent):
 			else: #If a message was sent in between game time and game time p.2
 				await ctx.channel.send("❗ Misfire ❗ {x} loses!".format(x = message.author.mention))
 				if message.author == opponent:
-					winner = str(ctx.author)
+					winner = ctx.author
 				elif message.author == ctx.author:
-					winner = str(opponent)
+					winner = opponent
 			
 			print(winner)
 			dickt = await dbGET(client, "DuelDB")

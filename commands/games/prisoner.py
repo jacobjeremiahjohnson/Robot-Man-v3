@@ -54,14 +54,14 @@ async def game(ctx, client, initial, opponent):
 
 					dickt = await dbGET(client, "prisonerDB")
 					for i in dickt:
-						if i == str(challenger):
-							val = dickt.get(str(challenger))
+						if i == str(challenger.id):
+							val = dickt.get(str(challenger.id))
 							#Values are two item lists, first value is ratted, second is denied
 							if str(choicePair[0]) == "🐀":
 								resultList = [val[0] + 1, val[1]]
 							elif str(choicePair[0]) == "🚫":
 								resultList = [val[0],val[1] + 1]
-							pair = {str(challenger):resultList}
+							pair = {str(challenger.id):resultList}
 							await dbADD(client, "prisonerDB", pair)
 							return
 						else:

@@ -29,7 +29,12 @@ async def on_ready():
 async def on_message(ctx):
   if ctx.content.startswith(">") or ctx.content.startswith("B)"):
     #Now its time to get funky (funky)
-    await checkCommand(ctx, client = client)
+    try:
+    	await checkCommand(ctx, client = client)
+    except:
+      t = parseMessage(ctx.content)
+      module = importlib.import_module("commands."+t.getFromIndex(0)[1::])
+      await ctx.channel.send(content = "", embed=errorEmbed(ctx.content, module.info.get("name")))
   
   nameDict = {
     "julie" : 413491484403433503,
@@ -105,13 +110,13 @@ async def close(ctx):
 async def on_command(ctx):
   print("{}:\n{}".format(str(ctx.message.author), ctx.message.content))
 
-@client.event #Syntax police
+"""@client.event #Syntax police
 async def on_command_error(ctx, error):
   print(error)
   t = parseMessage(ctx.message.content)
   if str(error) != 'Command "{}" is not found'.format(t.getFromIndex(0)[1::]):
     module = importlib.import_module("commands."+t.getFromIndex(0)[1::])
-    await ctx.channel.send(content = "", embed=errorEmbed(ctx.message.content, module.info.get("name")))
+    await ctx.channel.send(content = "", embed=errorEmbed(ctx.message.content, module.info.get("name")))"""
 
 @client.event #Bullying Roger
 async def on_member_update(before, after):

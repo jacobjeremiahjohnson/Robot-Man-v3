@@ -4,8 +4,6 @@ from googletrans import Translator #For translating
 from prawcore import NotFound #Reddit time deluxe *double dab*
 from datetime import datetime
 
-
-
 async def checkCommand(context, client = None):  
   t = parseMessage(context.content)
 

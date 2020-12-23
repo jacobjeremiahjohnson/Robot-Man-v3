@@ -130,12 +130,11 @@ async def game(ctx, client, initial, opponent):
 							pair = {str(turn):str(int(val) + 1)}
 							await dbADD(client, "tictactoeDB", pair)
 							return
-					else:
-						continue
+						else:
+							continue
 
 					await dbADD(client, "tictactoeDB", {str(turn.id):"1"})
 
-					await screen.clear_reactions()
 					numDict[digit] = mark
 					await screen.edit(content = turn.mention + " won!" + board.format(numDict.get("1"), numDict.get("2"), numDict.get("3"), numDict.get("4"),numDict.get("5"),numDict.get("6"),numDict.get("7"),numDict.get("8"),numDict.get("9")))
 
@@ -153,16 +152,15 @@ async def game(ctx, client, initial, opponent):
 							pair = {str(turn):str(int(val) + 1)}
 							await dbADD(client, "tictactoeDB", pair)
 							return
-					else:
-						continue
+						else:
+							continue
 
 					await dbADD(client, "tictactoeDB", {str(turn.id):"1"})
 
-					await screen.clear_reactions()
 					numDict[digit] = mark
 					await screen.edit(content = turn.mention + " won!" + board.format(numDict.get("1"), numDict.get("2"), numDict.get("3"), numDict.get("4"),numDict.get("5"),numDict.get("6"),numDict.get("7"),numDict.get("8"),numDict.get("9")))
 					
-					break
+					return
 				turn = ctx.author
 
 			numDict[digit] = mark

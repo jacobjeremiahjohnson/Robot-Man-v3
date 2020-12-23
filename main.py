@@ -72,7 +72,10 @@ async def on_message(ctx):
     difference = christmas - now
     j, k = str(difference).split(",")
     hours, minutes, seconds = k.split(":")
-    await ctx.channel.send("There are {j},{hours} hours, {minutes} minutes, and {seconds} seconds until christmas.".format(j = j, hours = hours, minutes = minutes, seconds = seconds))
+    if int(j) == 0:
+      await ctx.channel.send("Santa pog")
+    else:
+    	await ctx.channel.send("There are {j},{hours} hours, {minutes} minutes, and {seconds} seconds until christmas.".format(j = j, hours = hours, minutes = minutes, seconds = seconds))
   if "water" in ctx.content and "wet" in ctx.content and "is" in ctx.content and ctx.author.name != "Robot Man III":
 
 	  await ctx.channel.send("The Merriam-Webster definition of wet is: covered or soaked with a liquid, such as water; not yet dry or firm, such as wet paint; and to be stored or preserved in liquid. Wet seems to be a complex word, and yet this term is thrown around in a lot of improper ways. Mainly is the common misconception is that water is wet. This is simply not true. If we take an in depth look at what water truly is in relation to the adjective of wetness. Namely, how this adjective cannot apply to water in any of its definitions. \n\n The most common definition of wet is to be covered or soaked with a liquid, most commonly water. To keep things simple, we will assume this definition is restricted to just water. If this does not satisfy the reader, an analysis of liquids that can make water considered wet will be made. At the moment, we are assuming this only applies to water. For something to be covered with a water, that means there has to be some sort of discernable difference between the water and what it is covering. This is not the case if you are covering water with water. Even if the different groups have a different salt content, there still will be no guaranteed way to tell the difference between the water, and if this hypothetical experiment were to take place, which group of water will be considered the wet and which is the wetting? This paradox occurs because this definition of water is implying that for something to be wet it must first not be completely made up of the liquid in question, in this case water. Of course, this is all implied, but I think it is safe to assume that without this notion of the material that is being wetted this definition falls apart in a logical paradox.")
@@ -97,7 +100,7 @@ async def on_message(ctx):
     await ctx.channel.send(file = discord.File("concepts.txt"))
     os.remove("concepts.txt")
 
-  if ctx.channel.id == 587741556551843860:
+  if ctx.channel.id == 760318595245801493:
     global api
     api.update_status(ctx.author.name + ": " + ctx.clean_content)
 

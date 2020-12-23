@@ -1,7 +1,7 @@
 from config import*
 
 info = {
-  "name" : ">flood [cusom string]",
+  "name" : ">flood [custom string]",
   "desc" : "Make *all* the mods angry"
 }
 
@@ -26,6 +26,4 @@ async def command(ctx, client):
   else:
     m = await ctx.channel.send("You don't have manage message permissions, file a complaint with your precinct's Discord moderator")
 
-    await asyncio.sleep(10)
-
-    await m.delete()
+ 

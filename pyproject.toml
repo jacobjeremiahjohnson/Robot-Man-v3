@@ -10,7 +10,7 @@ name = "robot-man-v3"
 version = "0.1.0"
 [tool.poetry.dependencies]
 discord = "^1.0"
-flask = "^1.1"
+flask = "^2.3"
 googletrans = "^2.4"
 gsearch = "^1.6"
 praw = "^6.5"
